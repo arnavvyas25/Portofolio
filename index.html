@@ -74,6 +74,21 @@
             font-size: 1rem;
             color: #38322F;
         }
+        .card-projects ul, .card-professional ul, .card-publications ul, .card-contact ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .card-projects li, .card-professional li, .card-publications li, .card-contact li {
+            margin-bottom: 10px;
+        }
+        .card-projects li::before, .card-professional li::before, .card-publications li::before, .card-contact li::before {
+            content: "•";
+            color: #FE8A01;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
         footer {
             background-color: #111111;
             color: #E4E4E4;
@@ -134,12 +149,7 @@
             <p>I am a third-year undergraduate student pursuing Data Science at Purdue University, graduating in 2026. My passion lies in exploring insights through data, building innovative solutions, and driving impactful change.</p>
         </section>
 
-        <section class="card p-4 mt-4">
-            <h2>My Interests</h2>
-            <p>I am particularly interested in machine learning, artificial intelligence, and data visualization. I thrive on solving complex problems and collaborating on exciting projects.</p>
-        </section>
-
-        <section id="projects" class="card p-4 mt-4">
+        <section id="projects" class="card card-projects p-4 mt-4">
             <h2>Projects</h2>
             <p>Here are some of the projects I have worked on:</p>
             <ul>
@@ -149,7 +159,7 @@
             </ul>
         </section>
 
-        <section id="professional" class="card p-4 mt-4">
+        <section id="professional" class="card card-professional p-4 mt-4">
             <h2>Professional</h2>
             <p>Details about my professional experience:</p>
             <ul>
@@ -159,7 +169,7 @@
             </ul>
         </section>
 
-        <section id="publications" class="card p-4 mt-4">
+        <section id="publications" class="card card-publications p-4 mt-4">
             <h2>Publications</h2>
             <p>Here are some of my publications:</p>
             <ul>
@@ -169,7 +179,7 @@
             </ul>
         </section>
 
-        <section id="contact" class="card p-4 mt-4">
+        <section id="contact" class="card card-contact p-4 mt-4">
             <h2>Contact</h2>
             <p>You can reach me at:</p>
             <ul>
