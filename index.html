@@ -12,21 +12,18 @@
             background: linear-gradient(to bottom, #f8f9fa, #e8ecef);
             color: #343a40;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
         .navbar {
             background: rgba(0, 123, 255, 0.9);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .navbar-brand {
-            font-size: 1.5rem;
+        .navbar-brand, .nav-link {
             color: #fff !important;
             font-weight: bold;
-        }
-        .nav-link {
-            color: #fff !important;
             transition: color 0.3s, transform 0.3s;
         }
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover {
             color: #ffdd57 !important;
             transform: scale(1.1);
         }
@@ -36,15 +33,21 @@
             color: #fff;
             text-align: center;
             padding: 100px 20px;
+            position: relative;
         }
         header h1 {
             font-size: 3.5rem;
             margin-bottom: 15px;
+            animation: fadeInDown 1.5s ease-in-out;
         }
         header p {
             font-size: 1.5rem;
             max-width: 600px;
             margin: auto;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        header .cta-buttons {
+            margin-top: 30px;
         }
         header .cta-buttons a {
             margin: 0 10px;
@@ -52,32 +55,45 @@
             border-radius: 5px;
             font-weight: bold;
             text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
         }
         header .btn-primary {
             background: #ffdd57;
             color: #343a40;
+        }
+        header .btn-outline-light:hover {
+            background: #fff;
+            color: #007bff;
         }
         header img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             border: 5px solid #fff;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
         }
-        .card {
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+        main {
+            padding: 60px 20px;
+            text-align: center;
         }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        main h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        main p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.6;
+            color: #555;
         }
         footer {
             background: #343a40;
             color: #fff;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
         }
         footer a {
@@ -88,10 +104,17 @@
         footer a:hover {
             color: #fff;
         }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="#">Arnav Vyas</a>
@@ -100,7 +123,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#interests">Interests</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -109,7 +132,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header>
         <img src="images/headshot.jpeg" alt="Arnav Vyas">
         <h1>Welcome to My Portfolio</h1>
@@ -120,23 +142,17 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <section id="about" class="text-center mt-5">
+    <main>
+        <section id="about">
             <h2>About Me</h2>
-            <div class="card">
-                <p>I’m a third-year Data Science student at Purdue University, graduating in 2026. I specialize in leveraging data to create meaningful insights and solutions that make a real-world impact.</p>
-            </div>
+            <p>I’m a third-year Data Science student at Purdue University, graduating in 2026. I specialize in leveraging data to create meaningful insights and solutions that make a real-world impact.</p>
         </section>
-        <section id="interests" class="text-center mt-5">
+        <section id="interests">
             <h2>My Interests</h2>
-            <div class="card">
-                <p>Passionate about machine learning, artificial intelligence, and cutting-edge technologies. I thrive on building innovative solutions and collaborating with like-minded individuals.</p>
-            </div>
+            <p>Passionate about machine learning, artificial intelligence, and cutting-edge technologies. I thrive on building innovative solutions and collaborating with like-minded individuals.</p>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Arnav Vyas. Built with passion and innovation. <a href="#contact">Contact Me</a></p>
     </footer>
