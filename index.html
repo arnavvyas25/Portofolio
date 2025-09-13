@@ -46,6 +46,24 @@
   cursor: pointer;
   z-index: 2000;
 }
+/* Light mode navbar links */
+body.light-mode .navbar .nav-link,
+body.light-mode .navbar-brand {
+  color: #333 !important;    /* Dark text for visibility on light background */
+}
+
+/* Adjust hover state for light mode */
+body.light-mode .navbar .nav-link:hover,
+body.light-mode .navbar-brand:hover {
+  color: var(--accent) !important;
+}
+
+/* Fix the hamburger toggler icon in light mode */
+body.light-mode .navbar-toggler {
+  filter: invert(1);          /* Invert the default icon to dark */
+  border-color: #333;         /* Optional: dark border on light mode */
+}
+
   </style>
 </head>
 <body>
