@@ -159,36 +159,122 @@
   </header>
 
   <main>
-    <section id="projects" class="section-card">
-      <h2>Projects</h2>
-      <div class="skills">
-        <div class="skill-tag" data-filter="ml">Machine Learning</div>
-        <div class="skill-tag" data-filter="viz">Visualization</div>
-        <div class="skill-tag" data-filter="analytics">Analytics</div>
-      </div>
-      <div id="projectCarousel" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-category="viz">
-            <img src="https://picsum.photos/800/300?random=1" alt="Project 1">
-            <div class="carousel-caption">Advanced Data Visualization Dashboard</div>
-          </div>
-          <div class="carousel-item" data-category="analytics">
-            <img src="https://picsum.photos/800/300?random=2" alt="Project 2">
-            <div class="carousel-caption">Predictive Analytics for Business Insights</div>
-          </div>
-          <div class="carousel-item" data-category="ml">
-            <img src="https://picsum.photos/800/300?random=3" alt="Project 3">
-            <div class="carousel-caption">ML Model for Sentiment Analysis</div>
-          </div>
+ <!-- Replace the old Projects section with this -->
+<section id="projects" class="section-card">
+  <h2>Projects</h2>
+
+  <!-- Filter buttons -->
+  <div class="skills">
+    <div class="skill-tag" data-filter="all">All</div>
+    <div class="skill-tag" data-filter="ml">Machine Learning</div>
+    <div class="skill-tag" data-filter="viz">Visualization</div>
+    <div class="skill-tag" data-filter="analytics">Analytics</div>
+  </div>
+
+  <!-- Grid of project cards -->
+  <div class="row g-4" id="projectGrid">
+    <div class="col-md-4 project-card" data-category="viz">
+      <div class="card h-100 shadow-sm">
+        <img src="https://picsum.photos/400/250?random=11" class="card-img-top" alt="Dashboard Project">
+        <div class="card-body">
+          <h5 class="card-title">Advanced Visualization Dashboard</h5>
+          <p class="card-text">Interactive dashboards with D3.js and Plotly to uncover business insights.</p>
+          <button class="btn btn-outline-light details-btn" data-title="Advanced Visualization Dashboard" 
+            data-desc="Built interactive dashboards using D3.js, Plotly, and React to visualize multi-dimensional datasets for decision-making.">Details</button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </button>
       </div>
+    </div>
+
+    <div class="col-md-4 project-card" data-category="analytics">
+      <div class="card h-100 shadow-sm">
+        <img src="https://picsum.photos/400/250?random=12" class="card-img-top" alt="Analytics Project">
+        <div class="card-body">
+          <h5 class="card-title">Predictive Analytics Engine</h5>
+          <p class="card-text">Engineered pipelines and models for forecasting trends and business KPIs.</p>
+          <button class="btn btn-outline-light details-btn" data-title="Predictive Analytics Engine" 
+            data-desc="Developed data pipelines and deployed an XGBoost model to forecast KPIs with a 95% accuracy, improving strategy planning.">Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 project-card" data-category="ml">
+      <div class="card h-100 shadow-sm">
+        <img src="https://picsum.photos/400/250?random=13" class="card-img-top" alt="ML Project">
+        <div class="card-body">
+          <h5 class="card-title">Sentiment Analysis Model</h5>
+          <p class="card-text">Built a Transformer-based NLP model for real-time sentiment tracking.</p>
+          <button class="btn btn-outline-light details-btn" data-title="Sentiment Analysis Model" 
+            data-desc="Designed and fine-tuned a BERT-based model to classify sentiment in live social media feeds, achieving 92% accuracy.">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
     </section>
+
+    <!-- Modal for project details -->
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+            <h5 class="modal-title" id="projectModalLabel"></h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="projectModalDesc"></div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <style>
+    /* Extra styling for new projects grid */
+    #projects .card {
+        background: #0f3460;
+        color: #fff;
+        border: none;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    body.light-mode #projects .card {
+        background: #fff;
+        color: #333;
+    }
+    #projects .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .btn-outline-light { border-color: var(--accent); color: var(--accent); }
+    .btn-outline-light:hover { background: var(--accent); color: #fff; }
+    </style>
+
+    <script>
+    // Project filtering
+    const filterButtons = document.querySelectorAll('.skill-tag');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn=>{
+        btn.addEventListener('click',()=>{
+        const filter = btn.dataset.filter;
+        projectCards.forEach(card=>{
+            card.style.display = (filter === 'all' || card.dataset.category===filter) ? 'block' : 'none';
+        });
+        });
+    });
+
+    // Modal details
+    const detailsButtons = document.querySelectorAll('.details-btn');
+    const modalTitle = document.getElementById('projectModalLabel');
+    const modalDesc = document.getElementById('projectModalDesc');
+
+    detailsButtons.forEach(button=>{
+        button.addEventListener('click',()=>{
+        modalTitle.textContent = button.dataset.title;
+        modalDesc.textContent = button.dataset.desc;
+        const modal = new bootstrap.Modal(document.getElementById('projectModal'));
+        modal.show();
+        });
+    });
+    </script>
 
     <section id="professional" class="section-card">
       <h2>Professional</h2>
