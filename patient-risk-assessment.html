@@ -118,6 +118,64 @@
             cursor: pointer;
             z-index: 2000;
         }
+
+        /* Phase section styles */
+        .phase-item {
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        body.light-mode .phase-item {
+            border-bottom-color: rgba(0,0,0,0.1);
+        }
+
+        .phase-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .phase-title {
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .phase-list {
+            margin: 0;
+            padding-left: 1.25rem;
+            line-height: 1.8;
+        }
+
+        .phase-list li {
+            margin-bottom: 0.4rem;
+        }
+
+        .phase-list code {
+            background: rgba(255,111,97,0.15);
+            color: var(--accent);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        body.light-mode .phase-list code {
+            background: rgba(255,111,97,0.2);
+        }
+
+        .k8s-section {
+            margin-top: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .k8s-section strong {
+            color: #aaa;
+        }
+
+        body.light-mode .k8s-section strong {
+            color: #555;
+        }
     </style>
 </head>
 
@@ -163,6 +221,68 @@
 
         <div id="result" class="result-box"></div>
         <div id="error" class="error-box"></div>
+    </section>
+
+    <section class="section-card">
+        <h2 style="color:var(--accent);margin-bottom:1.5rem;">How It Was Built</h2>
+
+        <div class="phase-item">
+            <h5 class="phase-title">Phase 1: ML Model Development</h5>
+            <ul class="phase-list">
+                <li>Created a simple risk prediction model (<code>model.py</code>) using weighted linear combination of patient vitals</li>
+                <li>Normalized output to 0-1 range for risk scoring</li>
+            </ul>
+        </div>
+
+        <div class="phase-item">
+            <h5 class="phase-title">Phase 2: API Development</h5>
+            <ul class="phase-list">
+                <li>Built FastAPI application with two endpoints:
+                    <ul>
+                        <li><code>POST /predict</code> – accepts patient data, returns risk score</li>
+                        <li><code>GET /health</code> – health check for Kubernetes probes</li>
+                    </ul>
+                </li>
+                <li>Defined Pydantic model (<code>PatientInput</code>) for input validation</li>
+                <li>Configured CORS middleware for specific allowed origins</li>
+            </ul>
+        </div>
+
+        <div class="phase-item">
+            <h5 class="phase-title">Phase 3: Containerization</h5>
+            <ul class="phase-list">
+                <li>Created Dockerfile using <code>python:3.10-slim</code> base image</li>
+                <li>Set up working directory and copied requirements</li>
+                <li>Installed dependencies and exposed port 8000</li>
+                <li>Configured Uvicorn as the ASGI server</li>
+            </ul>
+        </div>
+
+        <div class="phase-item">
+            <h5 class="phase-title">Phase 4: Kubernetes Deployment</h5>
+            <div class="k8s-section">
+                <strong>Deployment</strong> (<code>deployment.yaml</code>)
+                <ul class="phase-list">
+                    <li>2 replica pods for high availability</li>
+                    <li>Resource limits (100m–500m CPU)</li>
+                    <li>Local image pull policy for development</li>
+                </ul>
+            </div>
+            <div class="k8s-section">
+                <strong>Service</strong> (<code>service.yaml</code>)
+                <ul class="phase-list">
+                    <li>NodePort service type for external access</li>
+                    <li>Port mapping 80 → 8000</li>
+                </ul>
+            </div>
+            <div class="k8s-section">
+                <strong>HPA</strong> (<code>hpa.yaml</code>)
+                <ul class="phase-list">
+                    <li>Auto-scaling between 2–5 replicas</li>
+                    <li>CPU utilization target of 50%</li>
+                </ul>
+            </div>
+        </div>
     </section>
 </main>
 
